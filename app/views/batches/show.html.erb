@@ -1,0 +1,33 @@
+<ol class='breadcrumb'>
+  <li><%= link_to 'Batches', batches_path %></li>
+  <li class='active'><%= @batch.name %></li>
+</ol>
+
+
+<div class='well'>
+  <dl>
+    <dt>Batch Name</dt>
+    <dd><%= @batch.name %></dd>
+
+    <br>
+
+    <dt>Batch Start Date</dt>
+    <dd><%= date_time_format(@batch.date) %></dd>
+
+    <br>
+
+    <dt>Pigs in Batch</dt>
+    <table class='table table-striped table-hover table-bordered'>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+      </tr>
+      <% @batch.pigs.each do |pig| %>
+      <tr>
+        <td><%= link_to pig.name, pig_path(pig) %></td>
+        <td><%= time_ago_in_words(pig.birthdate) %></td>
+        <% end %>
+      </tr>
+    </table>
+  </dl>
+</div>

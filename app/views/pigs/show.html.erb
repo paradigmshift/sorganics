@@ -1,0 +1,19 @@
+<ol class='breadcrumb'>
+  <li><%= link_to 'Batches', batches_path %></li>
+  <li><%= link_to @pig.batch.name, batch_path(@pig.batch) %></li>
+  <li class='active'><%= @pig.name %></li>
+</ol>
+
+<div class='well'>
+  <p class='pull-right'><%= link_to "[edit]", edit_pig_path(@pig) %></p>
+  <dl>
+    <dt>Name</dt>
+    <dd><%= @pig.name %></dd>
+    <dt>Birthdate</dt>
+    <dd><%= date_time_format(@pig.birthdate) %>, or <%= time_ago_in_words(@pig.birthdate) %> ago</dd>
+    <dt>Cost</dt>
+    <dd><%= @pig.cost %></dd>
+    <dt>Cause of Death</dt>
+    <dd><%= @pig.cause_of_death %></dd>
+  </dl>
+</div>

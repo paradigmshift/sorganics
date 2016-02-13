@@ -1,0 +1,34 @@
+<%= form_for @pig do |f| %>
+<div class='well'>
+  <div class='form-group'>
+    <%= f.label :name %>
+    <br>
+    <%= f.text_field :name %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :birthdate %>
+    <br>
+    <%= f.text_field :birthdate, "data-provide" => 'datepicker' %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :starting_weight %>
+    <br>
+    <%= f.number_field :weight_at_beginning, step: 0.5 %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :cost %>
+    <br>
+    <%= f.number_field :cost, step: 0.5 %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :cause_of_death %>
+    <br>
+    <%= f.select :cause_of_death, [['Still living', nil], ['Slaughtered', 'slaughtered'], ['Disease', 'disease']] %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :batch %>
+    <br>
+    <%= f.collection_select :batch_id, Batch.all, :id, :name %>
+    </div>
+  <%= f.submit(@pig.new_record? ? "Add pig" : "Update pig", class: 'btn btn-success')%>
+<% end %>

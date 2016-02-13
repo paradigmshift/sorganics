@@ -1,0 +1,12 @@
+<div class='row'>
+<%= link_to "Add a batch", new_batch_path, class:'btn btn-primary' %>
+<%= link_to "Add a pig", new_pig_path, class:'btn btn-primary' %>
+</div>
+
+<br>
+
+<% @batches.each do |batch| %>
+  <div class='well well-sm'>
+    <%= link_to batch.name, batch_path(batch) %>
+  </div>
+<% end %>
