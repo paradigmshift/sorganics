@@ -8,4 +8,5 @@ class ApplicationController < ActionController::Base
   def date_time_format(dt)
     dt.in_time_zone("Hong Kong").strftime("%m-%d-%Y %k:%M")
   end
+
 end

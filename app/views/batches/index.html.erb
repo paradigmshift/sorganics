@@ -1,12 +1,29 @@
-<div class='row'>
-<%= link_to "Add a batch", new_batch_path, class:'btn btn-primary' %>
-<%= link_to "Add a pig", new_pig_path, class:'btn btn-primary' %>
-</div>
+<table class='table table-bordered table-striped table-hover'>
+  <tr>
+    <th>Active Batches</th>
+    <th>Date Started</th>
+    <th>Date Last Edited</th>
+  </tr>
+  <% @active_batches.each do |batch| %>
+  <tr>
+    <td><%= link_to batch.name, batch_path(batch) %></td>
+    <td><%= date_time_format(batch.date) %></td>
+    <td><%= date_time_format(batch.updated_at) %></td>
+    <td><%= link_to "Retire", toggle_batch_path(batch), class: 'btn btn-danger', method: :post %></td>
+  </tr>
+  <% end %>
+</table>
 
-<br>
-
-<% @batches.each do |batch| %>
-  <div class='well well-sm'>
-    <%= link_to batch.name, batch_path(batch) %>
-  </div>
-<% end %>
+<table class='table table-bordered table-striped table-hover'>
+  <tr>
+    <th>Retired Batches</th>
+    <th>Date Retired</th>
+  </tr>
+  <% @retired_batches.each do |batch| %>
+  <tr>
+    <td><%= link_to batch.name, batch_path(batch) %></td>
+    <td><%= date_time_format(batch.updated_at) %></td>
+    <td><%= link_to "Re-activate", toggle_batch_path(batch), class: 'btn btn-warning', method: :post %></td>
+  </tr>
+  <% end %>
+</table>

@@ -1,6 +1,6 @@
-class CreateWeeklyWeights < ActiveRecord::Migration
+class CreateWeights < ActiveRecord::Migration
   def change
-    create_table :weekly_weights do |t|
+    create_table :weights do |t|
       t.datetime :date
       t.float :weight
       t.integer :pig_id

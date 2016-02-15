@@ -5,7 +5,9 @@
 </ol>
 
 <div class='well'>
-  <p class='pull-right'><%= link_to "[edit]", edit_pig_path(@pig) %></p>
+  <p class='pull-right'><%= link_to edit_pig_path(@pig) do %>
+    <i class='glyphicon glyphicon-pencil'></i> Edit
+    <% end %> </p>
   <dl>
     <dt>Name</dt>
     <dd><%= @pig.name %></dd>
@@ -15,5 +17,24 @@
     <dd><%= @pig.cost %></dd>
     <dt>Cause of Death</dt>
     <dd><%= @pig.cause_of_death %></dd>
+
+    <br>
+
+    <dt>Scheduled Weighings</dt>
+    <table class='table table-striped table-hover table-bordered'>
+      <tr>
+        <th>Date</th>
+        <th>Weight</th>
+      </tr>
+      <% @pig.weights.order("created_at desc").each do |weight| %>
+      <tr>
+        <td><%= date_time_format(weight.date) %></td>
+        <td><%= weight.weight %></td>
+      </tr>
+      <% end %>
+    </table>
   </dl>
+  <%= link_to new_pig_weight_path(@pig) do %>
+  <i class='glyphicon glyphicon-plus'></i> Add a weight
+  <% end %>
 </div>

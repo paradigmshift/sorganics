@@ -1,0 +1,24 @@
+<%= render 'layouts/errors', obj: @pig %>
+
+<ol class='breadcrumb'>
+  <li><%= link_to 'Batches', batches_path %></li>
+  <li><%= link_to @pig.batch.name, batch_path(@pig.batch) %></li>
+  <li><%= link_to @pig.name, pig_path(@pig) %></li>
+  <li class='active'>Add weight</li>
+</ol>
+
+<div class='well'>
+  <%= form_for [@pig, @weight] do |f| %>
+  <div class='form-group'>
+    <%= f.label :date %>
+    <br>
+    <%= f.text_field :date, "data-provide" => 'datepicker' %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :weight %>
+    <br>
+    <%= f.number_field :weight, step: 0.5 %>
+  </div>
+  <%= f.submit(@weight.new_record? ? "Add weight" : "Update weight", class:'btn btn-success') %>
+  <% end %>
+</div>

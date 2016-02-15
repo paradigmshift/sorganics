@@ -1,4 +1,7 @@
 class PigsController < ApplicationController
+
+  before_filter :convert_datepicker_to_date, only: [:create]
+
   def show
     @pig = Pig.find(params[:id])
   end
@@ -8,7 +11,6 @@ class PigsController < ApplicationController
 
   def create
     @pig = Pig.new(pig_params)
-    binding.pry
 
     if @pig.save
       redirect_to :root
@@ -33,6 +35,10 @@ class PigsController < ApplicationController
   end
 
   private
+
+  def convert_datepicker_to_date
+    params[:pig][:date] = DateTime.strptime(params[:pig][:date], '%m/%d/%Y')
+  end
 
   def pig_params
     params.require(:pig).permit(:name, :birthdate, :weight_at_beginning, :cost, :cause_of_death, :batch_id)

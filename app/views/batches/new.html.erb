@@ -3,6 +3,8 @@
   <li class='active'>Create new batch</li>
 </ol>
 
+<%= render 'layouts/errors', obj: @batch %>
+
 <div class='well'>
   <%= form_for @batch do |f| %>
   <div class='form-group'>

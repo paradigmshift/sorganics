@@ -55,6 +55,12 @@ Rails.application.routes.draw do
   #   end
   root 'batches#index'
 
-  resources :pigs, only: [:new, :create, :edit, :update, :show]
-  resources :batches, except: [:destroy]
+  resources :pigs, only: [:new, :create, :edit, :update, :show] do
+    resources :weights, only: [:new, :create]
+  end
+  resources :batches, except: [:destroy] do
+    member do
+      post :toggle
+    end
+  end
 end
