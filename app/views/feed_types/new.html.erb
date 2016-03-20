@@ -1,0 +1,8 @@
+<ol class='breadcrumb'>
+  <li><%= link_to 'Feeds', feed_types_path %></li>
+  <li class='active'>Add a new type of Feed</li>
+</ol>
+
+<%= render 'layouts/errors', obj: @feed %>
+
+<%= render 'form' %>

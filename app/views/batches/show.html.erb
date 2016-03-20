@@ -16,6 +16,10 @@
 
     <br>
 
+    <%= link_to new_pig_path(batch: @batch) do %>
+    <i class='glyphicon glyphicon-plus'></i> Add a pig
+    <% end %>
+
     <dt>Pigs in Batch</dt>
     <table class='table table-striped table-hover table-bordered'>
       <tr>
@@ -27,6 +31,14 @@
         <td><%= link_to pig.name, pig_path(pig) %></td>
         <td><%= time_ago_in_words(pig.birthdate) %></td>
         <% end %>
+      </tr>
+    </table>
+    <dt>Feedings in Batch</dt>
+    <table class='table table-striped table-hover table-bordered'>
+      <tr>
+        <th>Date</th>
+        <th>Feed Type</th>
+        <th>Quantity</th>
       </tr>
     </table>
   </dl>

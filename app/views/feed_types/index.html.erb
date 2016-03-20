@@ -1,0 +1,15 @@
+<table class='table table-bordered table-striped table-hover'>
+  <tr>
+    <th>Feed Type</th>
+    <th>Date added</th>
+    <th>Date last modified</th>
+  </tr>
+  <% @feed_types.each do |feed| %>
+  <tr>
+    <td><%= feed.variety %></td>
+    <td><%= date_time_format(feed.created_at) %></td>
+    <td><%= date_time_format(feed.updated_at) %></td>
+    <td><%= link_to "Edit", edit_feed_type_path(feed) %></td>
+  </tr>
+  <% end %>
+</table>

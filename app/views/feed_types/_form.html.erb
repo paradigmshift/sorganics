@@ -1,0 +1,10 @@
+<div class='well'>
+  <%= form_for @feed do |f| %>
+  <div class='form-group'>
+    <%= f.label :type %>
+    <br>
+    <%= f.text_field :variety %>
+  </div>
+  <%= f.submit(@feed.new_record? ? "Add new Feed" : "Update Feed", class: 'btn btn-success') %>
+  <% end %>
+</div>

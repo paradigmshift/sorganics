@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160214063919) do
+ActiveRecord::Schema.define(version: 20160320055547) do
 
   create_table "batches", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +19,12 @@ ActiveRecord::Schema.define(version: 20160214063919) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active"
+  end
+
+  create_table "feed_types", force: :cascade do |t|
+    t.string   "variety"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "pigs", force: :cascade do |t|

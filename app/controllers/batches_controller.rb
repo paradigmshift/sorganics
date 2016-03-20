@@ -26,10 +26,10 @@ class BatchesController < ApplicationController
     end
   end
 
+  ### toggles batches between active (one or more pigs alive) and retired (all pigs deceased) states
   def toggle
     @batch = Batch.find(params[:id])
     @batch.update(:active => @batch.active? ? false : true)
-    binding.pry
     redirect_to :back
   end
 

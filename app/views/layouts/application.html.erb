@@ -21,19 +21,30 @@
           <li>
             <a href="#batch-menu" data-toggle="collapse">Batches <span class='caret'></span></a>
           </li>
-            <div class="collapse" id='batch-menu'>
-              <li><%= link_to new_batch_path do %>
-                <i class='glyphicon glyphicon-plus'></i> Add a batch
-                <% end %></li>
-              <li><%= link_to new_pig_path do %>
-                <i class='glyphicon glyphicon-plus'></i> Add a pig
-                <% end %></li>
-              <li><%= link_to batches_path do %>
-                <i class='glyphicon glyphicon-eye-open'></i> View Batches
-                <% end %> </li>
-            </div>
-            <hr>
-            <%= yield :sidebar %>
+          <div class="collapse" id='batch-menu'>
+            <li><%= link_to new_batch_path do %>
+              <i class='glyphicon glyphicon-plus'></i> Add a batch
+              <% end %></li>
+            <li><%= link_to new_pig_path do %>
+              <i class='glyphicon glyphicon-plus'></i> Add a pig
+              <% end %></li>
+            <li><%= link_to batches_path do %>
+              <i class='glyphicon glyphicon-eye-open'></i> View Batches
+              <% end %> </li>
+          </div>
+          <li>
+            <a href="#feed-menu" data-toggle="collapse">Feed <span class='caret'></span></a>
+          </li>
+          <div class="collapse" id='feed-menu'>
+            <li><%= link_to feed_types_path do %>
+              <i class='glyphicon glyphicon-eye-open'></i> View Feeds
+              <% end %></li>
+            <li><%= link_to new_feed_type_path do %>
+              <i class='glyphicon glyphicon-plus'></i> Add a new type of Feed
+              <% end %></li>
+          </div>
+          <hr>
+          <%= yield :sidebar %>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->

@@ -57,10 +57,14 @@ Rails.application.routes.draw do
 
   resources :pigs, only: [:new, :create, :edit, :update, :show] do
     resources :weights, only: [:new, :create]
+
   end
   resources :batches, except: [:destroy] do
     member do
       post :toggle
     end
   end
+
+  resources :feed_types, only: [:index, :new, :create, :edit, :update]
+
 end

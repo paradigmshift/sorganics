@@ -5,8 +5,11 @@ class PigsController < ApplicationController
   def show
     @pig = Pig.find(params[:id])
   end
+
   def new
     @pig = Pig.new
+    ## preselect batch if adding a pig from the batch table view
+    @pig.batch = Batch.find(params[:batch]) if params[:batch]
   end
 
   def create
@@ -24,7 +27,6 @@ class PigsController < ApplicationController
   end
 
   def update
-    binding.pry
     @pig = Pig.find(params[:id])
 
     if @pig.update(pig_params)
