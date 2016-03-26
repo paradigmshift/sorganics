@@ -43,6 +43,17 @@
               <i class='glyphicon glyphicon-plus'></i> Add a new type of Feed
               <% end %></li>
           </div>
+          <li>
+            <a href="#inventory-menu" data-toggle="collapse">Inventory <span class='caret'></span></a>
+          </li>
+          <div class="collapse" id='inventory-menu'>
+            <li><%= link_to inventories_path do %>
+              <i class='glyphicon glyphicon-eye-open'></i> View physical inventories
+              <% end %></li>
+            <li><%= link_to new_inventory_path do %>
+              <i class='glyphicon glyphicon-plus'></i> Record a physical inventory
+              <% end %></li>
+            </div>
           <hr>
           <%= yield :sidebar %>
         </ul>
@@ -68,21 +79,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <nav class="navbar navbar-default"> -->
-    <!--   <div class="container-fluid"> -->
-    <!--     <div class="navbar-header"> -->
-    <!--       <a class="navbar-brand" href="#"> -->
-    <!--         Siargao Organics -->
-    <!--       </a> -->
-    <!--     </div> -->
-    <!--   </div> -->
-    <!-- </nav> -->
-    <!-- <div class='container-fluid'> -->
-
-    <!--   <%= yield %> -->
-
-    <!-- </div> -->
 
     <script>
       $("#menu-toggle").click(function(e) {

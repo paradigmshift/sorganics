@@ -3,6 +3,9 @@ class InventoriesController < ApplicationController
 
   def index
     @inventories = Inventory.all.order(updated_at: :desc)
+    @inventory_dates = @inventories.map { |inventory| inventory.date.strftime('%m/%d/%Y') }.to_set
+    ## collects and groups the different physical inventories by date
+    @inventory_by_date = Hash[@inventory_dates.collect { |date| [date, @inventories.select { |i| i.date.strftime('%m/%d/%Y') == date }] }]
   end
 
   def new

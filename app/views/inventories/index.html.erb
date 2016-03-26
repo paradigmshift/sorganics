@@ -1,14 +1,28 @@
-<table class='table table-bordered table-striped table-hover'>
-  <tr>
-    <th>Variety</th>
-    <th>Quantity</th>
-    <th>Date</th>
-  </tr>
-  <% @inventories.each do |inventory| %>
-  <tr>
-    <td><%= link_to inventory.variety, edit_inventory_path(inventory) %></td>
-    <td><%= inventory.quantity %></td>
-    <td><%= inventory.date %></td>
-  </tr>
+<div class="panel-group">
+  <% @inventory_by_date.each_with_index do |(date, inventories), idx| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+        <a data-toggle="collapse" href="#<%= idx %>"><strong><%= date %></strong>
+        <span class='caret'></span></a>
+    </div>
+    <div id="<%= idx %>" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table class='table table-bordered table-striped table-hover'>
+          <tr>
+            <th>Variety</th>
+            <th>Quantity</th>
+            <th>Date</th>
+          </tr>
+          <% inventories.each do |inventory| %>
+          <tr>
+            <td><%= inventory.variety %></td>
+            <td><%= inventory.quantity %></td>
+            <td><%= inventory.date %></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
   <% end %>
-</table>
+</div>
