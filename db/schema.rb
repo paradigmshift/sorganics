@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160320055547) do
+ActiveRecord::Schema.define(version: 20160326035435) do
 
   create_table "batches", force: :cascade do |t|
     t.string   "name"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 20160320055547) do
 
   create_table "feed_types", force: :cascade do |t|
     t.string   "variety"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "inventories", force: :cascade do |t|
+    t.datetime "date"
+    t.integer  "quantity"
+    t.string   "variety"
+    t.integer  "feed_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

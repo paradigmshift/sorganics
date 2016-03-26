@@ -1,6 +1,6 @@
 class BatchesController < ApplicationController
 
-  before_filter :convert_datepicker_to_date, only: [:create]
+  before_action :convert_datepicker_to_date, only: [:create]
 
   def index
     @active_batches = Batch.all.where(active: true).order(updated_at: :desc)
@@ -20,6 +20,7 @@ class BatchesController < ApplicationController
     @batch.active = true
 
     if @batch.save
+      flash[:success] = "#{@batch.name} batch added!"
       redirect_to :root
     else
       render 'new'

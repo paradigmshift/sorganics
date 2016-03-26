@@ -1,0 +1,14 @@
+<table class='table table-bordered table-striped table-hover'>
+  <tr>
+    <th>Variety</th>
+    <th>Quantity</th>
+    <th>Date</th>
+  </tr>
+  <% @inventories.each do |inventory| %>
+  <tr>
+    <td><%= link_to inventory.variety, edit_inventory_path(inventory) %></td>
+    <td><%= inventory.quantity %></td>
+    <td><%= inventory.date %></td>
+  </tr>
+  <% end %>
+</table>

@@ -1,6 +1,6 @@
 class PigsController < ApplicationController
 
-  before_filter :convert_datepicker_to_date, only: [:create]
+  before_action :convert_datepicker_to_date, only: [:create]
 
   def show
     @pig = Pig.find(params[:id])
@@ -16,6 +16,7 @@ class PigsController < ApplicationController
     @pig = Pig.new(pig_params)
 
     if @pig.save
+      flash[:success] = "#{@pig.name} added to batch #{@pig.batch.name}"
       redirect_to :root
     else
       render '/new'
@@ -30,6 +31,7 @@ class PigsController < ApplicationController
     @pig = Pig.find(params[:id])
 
     if @pig.update(pig_params)
+      flash[:success] = "#{@pig.name}'s information has been updated!"
       redirect_to :root
     else
       render '/edit'
@@ -39,7 +41,7 @@ class PigsController < ApplicationController
   private
 
   def convert_datepicker_to_date
-    params[:pig][:date] = DateTime.strptime(params[:pig][:date], '%m/%d/%Y')
+    params[:pig][:birthdate] = DateTime.strptime(params[:pig][:birthdate], '%m/%d/%Y')
   end
 
   def pig_params

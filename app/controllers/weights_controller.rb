@@ -1,6 +1,6 @@
 class WeightsController < ApplicationController
 
-  before_filter :convert_datepicker_to_date, only: [:create]
+  before_action :convert_datepicker_to_date, only: [:create]
 
   def new
     @weight = Weight.new
@@ -13,6 +13,7 @@ class WeightsController < ApplicationController
     @pig.weights << @weight
 
     if @weight.save
+      flash[:success] = "Weight added to #{@pig.name}!"
       redirect_to pig_path(@pig)
     else
       render 'new'

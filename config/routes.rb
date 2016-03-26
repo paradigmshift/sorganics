@@ -67,4 +67,6 @@ Rails.application.routes.draw do
 
   resources :feed_types, only: [:index, :new, :create, :edit, :update]
 
+  resources :inventories, only: [:index, :new, :create, :edit, :update]
+
 end
