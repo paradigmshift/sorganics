@@ -2,7 +2,7 @@ class InventoriesController < ApplicationController
   before_action :convert_datepicker_to_date, only: [:create]
 
   def index
-    @inventories = Inventory.all.order(updated_at: :desc)
+    @inventories = Inventory.all.order(date: :desc)
     @inventory_dates = @inventories.map { |inventory| inventory.date.strftime('%m/%d/%Y') }.to_set
     ## collects and groups the different physical inventories by date
     @inventory_by_date = Hash[@inventory_dates.collect { |date| [date, @inventories.select { |i| i.date.strftime('%m/%d/%Y') == date }] }]
@@ -10,42 +10,49 @@ class InventoriesController < ApplicationController
 
   def new
     @inventory = Inventory.new
+    @feed_types  = FeedType.all
   end
 
   def create
-    @inventory = Inventory.new(inventory_params)
-    @inventory.variety = FeedType.find(@inventory.feed_type_id).variety
+    inventories = []
+    @feed_types = FeedType.all
+    @feed_types.each do |feed_type|
+      inventories.push(Inventory.new(inventory_params(feed_type)))
+    end
 
-    if @inventory.save
-      flash[:success] = "#{@inventory.variety} added to inventory!"
-      redirect_to inventories_path
-    else
+    ## save each entry or delete all entries of the same date if an entry has a problem
+    inventories.each do |inventory|
+      if not inventory.save
+        @to_delete = Inventory.where(date: inventory.date)
+        @to_delete.destroy_all
+        @errors = inventory.errors
+      end
+    end
+
+    if @to_delete
+      flash[:warning] = ""
+      @errors.full_messages.each { |err| flash[:warning] += err }
       render :new
-    end
-  end
-
-  def edit
-    @inventory = Inventory.find(params[:id])
-  end
-
-  def update
-    @inventory = Inventory.find(params[:id])
-
-    if @inventory.update(inventory_params)
-      flash[:success] = "#{@inventory.variety} updated!"
-      redirect_to inventories_path
     else
-      render :edit
+      flash[:success] = "Inventory added!"
+      redirect_to inventories_path
     end
+  end
+
+  def destroy
+    @date = DateTime.parse(params[:id])
+    @to_delete = Inventory.where('date BETWEEN ? AND ?', @date.beginning_of_day, @date.end_of_day).all
+    @to_delete.destroy_all
+    redirect_to inventories_path
   end
 
   private
 
   def convert_datepicker_to_date
-    params[:inventory][:date] = DateTime.strptime(params[:inventory][:date], '%m/%d/%Y')
+    params[:date] = DateTime.strptime(params[:date], '%m/%d/%Y') if params[:date] != ""
   end
 
-  def inventory_params
-    params.require(:inventory).permit(:date, :quantity, :feed_type_id)
+  def inventory_params(feed_type)
+    {"variety"=>feed_type.variety, "quantity"=>params["#{feed_type.variety}"][:quantity], "date"=>params[:date], "feed_type_id"=>feed_type.id}
   end
 end

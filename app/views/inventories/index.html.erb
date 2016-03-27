@@ -21,6 +21,9 @@
           </tr>
           <% end %>
         </table>
+        <%= link_to inventory_delete_path(inventories.first.date), method: :delete, data: {confirm: "This will permanently delete this entry, are you sure?"} do %>
+        <i class='glyphicon glyphicon-remove-circle'></i> Delete this entry
+        <% end %>
       </div>
     </div>
   </div>

@@ -1,1 +1,18 @@
-<%= render 'form' %>
+<%= form_tag("/inventories", method: "post") do %>
+  <div class='form-group'>
+    <%= label_tag(:date, "Date") %>
+    <%= text_field_tag(:date,nil, {"data-provide" => 'datepicker'}) %>
+  </div>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+         <th>Variety</th>
+         <th>Quantity</th>
+        </tr>
+      </thead>
+  <% @feed_types.each do |feed_type| %>
+  <%= render 'create_form', obj: feed_type %>
+  <% end %>
+  </table>
+  <%= submit_tag("Add physical inventory") %>
+<% end %>
