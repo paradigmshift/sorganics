@@ -5,6 +5,9 @@
 
 
 <div class='well'>
+  <p class='pull-right'><%= link_to edit_batch_path(@batch) do %>
+    <i class='glyphicon glyphicon-pencil'></i> Edit
+    <% end %> </p>
   <dl>
     <dt>Batch Name</dt>
     <dd><%= @batch.name %></dd>
@@ -20,7 +23,7 @@
     <i class='glyphicon glyphicon-plus'></i> Add a pig
     <% end %>
 
-    <dt>Pigs in Batch</dt>
+    <dt>Live pigs in Batch</dt>
     <table class='table table-striped table-hover table-bordered'>
       <tr>
         <th>Name</th>
@@ -33,6 +36,11 @@
         <% end %>
       </tr>
     </table>
+
+    <%= link_to new_batch_outgoing_inventory_path(@batch) do %>
+    <i class='glyphicon glyphicon-plus'></i> Add feed
+    <% end %>
+
     <dt>Feedings in Batch</dt>
     <table class='table table-striped table-hover table-bordered'>
       <tr>
@@ -40,6 +48,16 @@
         <th>Feed Type</th>
         <th>Quantity</th>
       </tr>
+      <% @batch.outgoing_inventories.each do |feed| %>
+      <tr>
+        <td><%= feed.date %></td>
+        <td><%= feed.variety %></td>
+        <td><%= feed.quantity %></td>
+        <td><%= link_to batch_outgoing_inventory_path(@batch, feed), method: :delete, data: {confirm: "This will permanently delete this entry, are you sure?"} do %>
+          <i class='glyphicon glyphicon-remove-circle'></i> Delete this entry
+        <% end %></td>
+      </tr>
+      <% end %>
     </table>
   </dl>
 </div>

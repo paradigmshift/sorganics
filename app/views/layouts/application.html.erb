@@ -22,15 +22,15 @@
             <a href="#batch-menu" data-toggle="collapse">Batches <span class='caret'></span></a>
           </li>
           <div class="collapse" id='batch-menu'>
+            <li><%= link_to batches_path do %>
+              <i class='glyphicon glyphicon-eye-open'></i> View Batches
+              <% end %> </li>
             <li><%= link_to new_batch_path do %>
               <i class='glyphicon glyphicon-plus'></i> Add a batch
               <% end %></li>
             <li><%= link_to new_pig_path do %>
               <i class='glyphicon glyphicon-plus'></i> Add a pig
               <% end %></li>
-            <li><%= link_to batches_path do %>
-              <i class='glyphicon glyphicon-eye-open'></i> View Batches
-              <% end %> </li>
           </div>
           <li>
             <a href="#feed-menu" data-toggle="collapse">Feed <span class='caret'></span></a>
@@ -47,6 +47,9 @@
             <a href="#inventory-menu" data-toggle="collapse">Inventory <span class='caret'></span></a>
           </li>
           <div class="collapse" id='inventory-menu'>
+            <li><%= link_to current_inventory_path do %>
+              <i class='glyphicon glyphicon-eye-open'></i> View Running inventory
+              <% end %></li>
             <li><%= link_to inventories_path do %>
               <i class='glyphicon glyphicon-eye-open'></i> View physical inventories
               <% end %></li>

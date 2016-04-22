@@ -1,0 +1,12 @@
+<table class='table table-bordered table-striped table-hover'>
+  <tr>
+    <td>Item </td>
+    <td>Quantity</td>
+  </tr>
+  <% FeedType.all.each do |item| %>
+  <tr>
+    <td><%= item.variety %></td>
+    <td><%= item.last_phys_inventory.quantity - item.outgoing_inventory %></td>
+  </tr>
+  <% end %>
+</table>

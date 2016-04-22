@@ -1,7 +1,5 @@
 class PigsController < ApplicationController
 
-  before_action :convert_datepicker_to_date, only: [:create, :update]
-
   def show
     @pig = Pig.find(params[:id])
   end
@@ -39,10 +37,6 @@ class PigsController < ApplicationController
   end
 
   private
-
-  def convert_datepicker_to_date
-    params[:pig][:birthdate] = DateTime.strptime(params[:pig][:birthdate], '%m/%d/%Y') if params[:pig][:birthdate] != ''
-  end
 
   def pig_params
     params.require(:pig).permit(:name, :birthdate, :weight_at_beginning, :cost, :cause_of_death, :batch_id)

@@ -1,7 +1,5 @@
 class BatchesController < ApplicationController
 
-  before_action :convert_datepicker_to_date, only: [:create]
-
   def index
     @active_batches = Batch.all.where(active: true).order(updated_at: :desc)
     @retired_batches = Batch.all.where(active: false).order(updated_at: :desc)
@@ -13,6 +11,10 @@ class BatchesController < ApplicationController
 
   def new
     @batch = Batch.new
+  end
+
+  def edit
+    @batch = Batch.find(params[:id])
   end
 
   def create
@@ -27,6 +29,16 @@ class BatchesController < ApplicationController
     end
   end
 
+  def update
+    @batch = Batch.find(params[:id])
+    if @batch.update(batch_params)
+      flash[:success] = "#{@batch.name} updated"
+      redirect_to batch_path(@batch)
+    else
+      render 'edit'
+    end
+  end
+
   ### toggles batches between active (one or more pigs alive) and retired (all pigs deceased) states
   def toggle
     @batch = Batch.find(params[:id])
@@ -35,10 +47,6 @@ class BatchesController < ApplicationController
   end
 
   private
-
-  def convert_datepicker_to_date
-    params[:batch][:date] = DateTime.strptime(params[:batch][:date], '%m/%d/%Y')
-  end
 
   def batch_params
     params.require(:batch).permit(:name, :date, :active)

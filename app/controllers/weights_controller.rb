@@ -1,7 +1,5 @@
 class WeightsController < ApplicationController
 
-  before_action :convert_datepicker_to_date, only: [:create]
-
   def new
     @weight = Weight.new
     @pig = Pig.find(params[:pig_id])
@@ -21,10 +19,6 @@ class WeightsController < ApplicationController
   end
 
   private
-
-  def convert_datepicker_to_date
-    params[:weight][:date] = DateTime.strptime(params[:weight][:date], '%m/%d/%Y')
-  end
 
   def weight_params
     params.require(:weight).permit(:date, :weight, :pig_id)

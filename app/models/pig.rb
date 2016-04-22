@@ -6,4 +6,8 @@ class Pig < ActiveRecord::Base
   validates :birthdate, presence: true
   validates :weight_at_beginning, presence: true
 
+  def live?
+
+  end
+
 end

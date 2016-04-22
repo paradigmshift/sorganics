@@ -1,5 +1,4 @@
 class InventoriesController < ApplicationController
-  before_action :convert_datepicker_to_date, only: [:create]
 
   def index
     @inventories = Inventory.all.order(date: :desc)
@@ -46,11 +45,10 @@ class InventoriesController < ApplicationController
     redirect_to inventories_path
   end
 
-  private
-
-  def convert_datepicker_to_date
-    params[:date] = DateTime.strptime(params[:date], '%m/%d/%Y') if params[:date] != ""
+  def current_inventory
   end
+
+  private
 
   def inventory_params(feed_type)
     {"variety"=>feed_type.variety, "quantity"=>params["#{feed_type.variety}"][:quantity], "date"=>params[:date], "feed_type_id"=>feed_type.id}

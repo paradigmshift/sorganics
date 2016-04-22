@@ -60,6 +60,7 @@ Rails.application.routes.draw do
 
   end
   resources :batches, except: [:destroy] do
+    resources :outgoing_inventories, only: [:new, :create, :destroy]
     member do
       post :toggle
     end
@@ -70,5 +71,7 @@ Rails.application.routes.draw do
   resources :inventories, only: [:index, :new, :create]
 
   delete '/inventories/:id/delete', to: 'inventories#destroy', as: 'inventory_delete'
+
+  get '/current_inventory', to: 'inventories#current_inventory', as: 'current_inventory'
 
 end

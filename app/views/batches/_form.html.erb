@@ -1,0 +1,24 @@
+<div class='well'>
+  <%= form_for @batch do |f| %>
+  <div class='row'>
+    <div class='form-group col-lg-2'>
+      <%= f.label :name %>
+      <br>
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='form-group col-lg-2'>
+      <%= f.label :date %>
+      <br>
+      <div class='input-group date' id='datetimepicker'>
+        <span class='input-group-addon'>
+          <span class='glyphicon glyphicon-calendar'></span>
+        </span>
+        <%= f.text_field :date, class: 'form-control'%>
+      </div>
+    </div>
+  </div>
+  <%= f.submit(@batch.new_record? ? "Create New Batch" : "Update Batch", class: 'btn btn-success') %>
+  <% end %>
+</div>
