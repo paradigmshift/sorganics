@@ -11,7 +11,7 @@ class OutgoingInventoriesController < ApplicationController
     @batch = Batch.find(params[:batch_id])
 
     if @feed.save
-      flash[:notice] = "Feed added!"
+      flash[:success] = "Feed added!"
       redirect_to batch_path(Batch.find(params[:batch_id]))
     else
       render 'new'

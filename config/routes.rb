@@ -70,6 +70,8 @@ Rails.application.routes.draw do
 
   resources :inventories, only: [:index, :new, :create]
 
+  resources :incoming_inventories, only: [:index, :new, :create, :destroy]
+
   delete '/inventories/:id/delete', to: 'inventories#destroy', as: 'inventory_delete'
 
   get '/current_inventory', to: 'inventories#current_inventory', as: 'current_inventory'

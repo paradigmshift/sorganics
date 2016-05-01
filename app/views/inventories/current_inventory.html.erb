@@ -6,7 +6,8 @@
   <% FeedType.all.each do |item| %>
   <tr>
     <td><%= item.variety %></td>
-    <td><%= item.last_phys_inventory.quantity - item.outgoing_inventory %></td>
+    <!-- <td><%= item.last_phys_inventory.quantity - item.outgoing_inventory + item.incoming_inventory %></td> -->
+    <td><%= item.current_inventory %></td>
   </tr>
   <% end %>
 </table>

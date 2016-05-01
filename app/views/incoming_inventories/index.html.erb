@@ -1,0 +1,14 @@
+<table class='table table-bordered table-striped table-hover'>
+  <tr>
+    <th>Feed Type</th>
+    <th>Quantity</th>
+    <th>Date</th>
+  </tr>
+  <% @incoming_inventories.each do |feed| %>
+  <tr>
+    <td><%= FeedType.find(feed.feed_type_id).variety %></td>
+    <td><%= feed.quantity %></td>
+    <td><%= feed.date %> </td>
+  </tr>
+  <% end %>
+</table>

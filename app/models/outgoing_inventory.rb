@@ -10,6 +10,6 @@ class OutgoingInventory < ActiveRecord::Base
   validate :prevent_negative_inventory, on: :create
 
   def prevent_negative_inventory
-    errors.add(:quantity, "can't go below 0") if FeedType.find(feed_type_id).last_phys_inventory.quantity - quantity < 0
+    errors.add(:quantity, "can't go below 0") if FeedType.find(feed_type_id).current_inventory - self.quantity < 0
   end
 end

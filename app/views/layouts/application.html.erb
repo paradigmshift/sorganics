@@ -53,6 +53,12 @@
             <li><%= link_to inventories_path do %>
               <i class='glyphicon glyphicon-eye-open'></i> View physical inventories
               <% end %></li>
+            <li><%= link_to incoming_inventories_path do %>
+              <i class='glyphicon glyphicon-eye-open'></i> View incoming inventories
+              <% end %></li>
+            <li><%= link_to new_incoming_inventory_path do %>
+              <i class='glyphicon glyphicon-plus'></i> Add incoming inventory
+              <% end %></li>
             <li><%= link_to new_inventory_path do %>
               <i class='glyphicon glyphicon-plus'></i> Record a physical inventory
               <% end %></li>

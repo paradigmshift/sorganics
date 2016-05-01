@@ -1,0 +1,32 @@
+<%= render 'layouts/errors', obj: @incoming_inventory %>
+<%= form_for @incoming_inventory do |f| %>
+<div class='well'>
+  <div class='row'>
+    <div class='form-group col-lg-2'>
+      <%= f.label :date %>
+      <br>
+      <div class='input-group date' id='datetimepicker'>
+        <span class='input-group-addon'>
+          <span class='glyphicon glyphicon-calendar'></span>
+        </span>
+        <%= f.text_field :date, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='form-group col-lg-2'>
+      <%= f.label :variety %>
+      <br>
+      <%= f.collection_select :feed_type_id, FeedType.all, :id, :variety %>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='form-group col-lg-2'>
+      <%= f.label :quantity %>
+      <br>
+      <%= f.number_field :quantity, step: 1 %>
+    </div>
+  </div>
+  <%= f.submit "Add incoming inventory", class: 'btn btn-success' %>
+  <% end %>
+</div>
